@@ -20,6 +20,10 @@ void Name_pairs::print() const{
 	for(int i=0;i<name.size();i++){
 		cout<<name[i]<<":"<<age[i]<<" ";
 	}
+	cout<<'\n';
+}
+ostream& operator<<(ostream& os,const Name_pairs& a){
+	a.print();	
 }
 double get_age(const vector<string>& name,const vector<double>& age,string target){
 	for(int i=0;i<name.size();i++){

@@ -1,3 +1,4 @@
+#pragma once
 #include "std_facilities.h"
 namespace Chrono{
     enum class Month{

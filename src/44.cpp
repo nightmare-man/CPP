@@ -6,10 +6,10 @@ int main(){
 	{
 		n.read_ages();
 		cout<<"print:\n";
-		n.print();
+		cout<<n;
 		cout<<"sort:\n";
 		n.sort1();
-		n.print();
+		cout<<n;
 	}catch(Name_pairs::Nomatch e){
 		cout<<"no age match!\n";
 		return 1;

@@ -5,10 +5,13 @@ class Name_pairs{
 		Name_pairs(){}
 		void read_name();
 		void read_ages();
-		void print() const;
 		void sort1();
+		void print()const;
 		class Nomatch{};
 	private:
 		vector<string> name;
 		vector<double> age;
 };
+ostream& operator<<(ostream& os,const Name_pairs& a);
+bool operator==(const Name_pairs& a,const Name_pairs& b);
+bool operator!=(const Name_pairs& a,const Name_pairs& b);

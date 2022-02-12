@@ -31,12 +31,13 @@ bool is_valid_isbn(string s){
     if(isalnum(s[idx])==0) return false;
     return true;
 }
-Book::Book(string i,string n,string a,Chrono::Date d){
+Book::Book(string i,string n,string a,Chrono::Date d,Genre t){
     if(!is_valid_isbn(i)) throw Bexception{"非法isbn\n"};
     isbn=i;
     author=a;
     name=n;
     copyright=d;
+    type=t;
     borrowed=false;
 }
 void Book::Rent(){
@@ -50,4 +51,14 @@ void Book::Return(){
     else{
         borrowed=false;
     }
+}
+bool operator==(const Book& a,const Book& b){
+	return (a.Isbn()==b.Isbn());
+}
+bool operator!=(const Book& a,const Book& b){
+	return !(a==b);
+}
+ostream& operator<<(ostream& os,const Book& a){
+	os<<a.Name()<<" "<<a.Author()<<" "<<a.Isbn()<<" "<<(int)a.Type();
+	return os; 
 }

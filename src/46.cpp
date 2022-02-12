@@ -4,7 +4,9 @@
 int main(){
 
 	try{
-		Book b{"123-123-123-x","XCODE","lsm",Chrono::Date{2012,Chrono::Month::jan,20}};
+		Book b{"123-123-123-x","XCODE","lsm",Chrono::Date{2012,Chrono::Month::jan,20},Genre::nofiction};
+
+		cout<<b;
 	}catch(Book::Bexception e){
 		cout<<e.msg;
 		return 1;

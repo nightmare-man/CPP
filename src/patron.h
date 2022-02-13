@@ -15,3 +15,4 @@ class Patron{
         double debet;
 };
 bool InDebet(const Patron& p);
+int valid_id();

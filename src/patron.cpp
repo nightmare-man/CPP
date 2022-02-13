@@ -1,4 +1,10 @@
 #include "patron.h"
+int valid_id(){
+    static int ret=10001;
+    ret++;
+    return ret;
+}
+
 bool InDebet(const Patron& p){
     return p.Debet()>0;
 }

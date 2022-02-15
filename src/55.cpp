@@ -42,20 +42,19 @@ istream& operator>>(istream& is,Reading& r){
     r.temperature=t;
     return is;
 }
+vector<string> month_input{
+    "jan","feb","mar","apr","may","jun",
+    "jul","aug","sep","oct","nov","dec"
+};
 int month_to_int(string m){
-    if(m=="jan")return 1;
-    else if(m=="feb")return 2;
-    else if(m=="mar") return 3;
-    else if(m=="apr") return 4;
-    else if(m=="may") return 5;
-    else if(m=="jun") return 6;
-    else if(m=="jul") return 7;
-    else if(m=="aug") return 8;
-    else if(m=="sep") return 9;
-    else if(m=="oct") return 10;
-    else if(m=="nov") return 11;
-    else if(m=="dec") return 12;
-    else return -1;
+    int ret=-1;
+    for(int i=0;i<month_input.size();i++){
+        if(month_input[i]==m){
+            ret=i;
+            break;
+        }
+    }
+    return ret;
 }
 bool is_valid(Reading x){
     return true;
@@ -80,7 +79,7 @@ istream& operator>>(istream& is,Month& m){
     string mm;
     is>>month_marker>>mm;
     if(!is||month_marker!="month")error("bad start of month");
-    int n=month_to_int(mm)-1;
+    int n=month_to_int(mm);
     if(n==-1) error("invalid month\n");
     m.month=n;
     int duplicates=0;
@@ -133,7 +132,7 @@ istream& operator>>(istream& is,Year& y){
     return is;
 }
 void print_month(ostream& os,const Month &m){
-    os<<"\tmonth:"<<m.month<<'\n';
+    os<<"\tmonth:"<<month_input[m.month]<<'\n';
     for(int i=0;i<m.day.size();i++){
         os<<"\t[day:"<<i+1;
         for(int j=0;j<m.day[i].hour.size();j++){

@@ -1,4 +1,5 @@
 #include "std_facilities.h"
+//-fno-elide-constructors 关闭构造函数优化
 struct X{
     int val;
     void out(const string& s,int nv){
@@ -26,7 +27,9 @@ struct XX{
 int main(){
     X loc{4};
     X loc2{loc};
-    loc=X{5};
+    loc=X{5};//这里会先用int参数构造函数产生一个临时变量
+    //然后再用该变量拷贝赋值给loc，再析构该零时变量
+    //如果这里是声明loc再初始化，那就直接相当于X loc{5};
     loc2=copy(loc);
     loc2=copy2(loc);
     X loc3{6};

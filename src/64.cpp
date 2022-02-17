@@ -16,7 +16,7 @@ class MyS{
 class MyV{
     public:
         MyV(const MyV& p):val{new MyS{}}{
-            *val=*p.print_val_p();
+            *val=*(p.print_val_p());
             cout<<"MyV执行了val指向的MyS复制\n";
         }
         MyV():val{new MyS{-1}}{
@@ -35,8 +35,8 @@ int main(){
     MyV p{10};
     MyV p1=p;
     cout<<"p的val指针为"<<p.print_val_p();
-    cout<<p.Val()<<'\n';
+    cout<<"p的值为:"<<p.Val()<<'\n';
     cout<<"p1的val指针为"<<p1.print_val_p();
-    cout<<p1.Val()<<'\n';
+    cout<<"p1的值为:"<<p1.Val()<<'\n';
     return 0;
 }

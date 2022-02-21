@@ -78,12 +78,22 @@ class Mvector{
         //新解释，该函数是例如const Mvector<int>时会被调用
         //不存在Mvector<const int> 因为这样无法初始化
         const T& operator[](int n)const;
+        T& at(int n);
+        const T& at(int n)const;
     private:
         int sz;
         int space;
         T* elem;
         A alloc;
 };
+template<class T,class A> T& Mvector<T,A>::at(int n){
+    if(n<0||n>=sz) throw std::out_of_range();
+    return elem[n];
+}
+template<class T,class A> const T& Mvector<T,A>::at(int n)const{
+    if(n<0||n>=sz) throw std::out_of_range();
+    return elem[n];
+}
 template<class T,class A> void Mvector<T,A>::reserve(int newsize){
     if(newsize<=space) return;
     //分配原始空间

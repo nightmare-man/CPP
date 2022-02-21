@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <iostream>
 template<typename T>
 class Mvector{
     public:
@@ -60,14 +61,22 @@ class Mvector{
             for(int i=0;i<sz;i++) elem[i]=T();
             sz=newsize;
         }
-        T& operator[](int n){
-            return elem[n];            
-        }
-        const T& operator[](int n)const{
-            return elem[n];
-        }
+        T& operator[](int n);
+        //不太可能调用这个函数啊，既然是const 那怎么初始化的呢？
+        //怎么push_back赋值的；
+        //新解释，该函数是例如const Mvector<int>时会被调用
+        //不存在Mvector<const int> 因为这样无法初始化
+        const T& operator[](int n)const;
     private:
         int sz;
         int space;
         T* elem;
 };
+template<class T> T& Mvector<T>::operator[](int n){
+    std::cout<<"normal call"<<'\n';
+    return elem[n];
+}
+template<class T> const T& Mvector<T>::operator[](int n)const{
+    std::cout<<"const call"<<'\n';
+    return elem[n];
+}

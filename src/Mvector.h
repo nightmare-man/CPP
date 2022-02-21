@@ -97,14 +97,17 @@ template<class T,class A> const T& Mvector<T,A>::at(int n)const{
 template<class T,class A> void Mvector<T,A>::reserve(int newsize){
     if(newsize<=space) return;
     //分配原始空间
-    T* newalloc=alloc.allocate(newsize);
+    //T* newalloc=alloc.allocate(newsize);
+    unique_ptr<T> newalloc{alloc.allocate(newsize)};
     //对每一个进行拷贝初始化
-    for(int i=0;i<sz;i++) alloc.construct(&newalloc[i],elem[i]);
+    //construct的拷贝操作可能会出现异常，出现异常时，newalloc将内存泄漏
+    //因此使用unique_ptr代替原版
+    for(int i=0;i<sz;i++) alloc.construct(&newalloc.release()[i],elem[i]);
     //将初始化变回未初始化空间
     for(int i=0;i<sz;i++) alloc.destroy(&elem[i]);
     //回收原空间
     alloc.deallocate(elem,space);
-    elem=newalloc;
+    elem=newalloc.release();
     space=newsize;
 } 
 //默认值只放在声明就行了，不能放在定义

@@ -2,14 +2,11 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <memory>
 using namespace std;
 
-void func(Mvector<string>& v){
-    sort(&v[0],&v[v.size()]);
-}
 int main(){
     Mvector<int> p(10);
-    const Mvector<int> p11(20);
-    cout<<p11[0]<<'\n';
+    cout<<p[0]<<'\n';
     return 0;
 }
